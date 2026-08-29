@@ -24,6 +24,9 @@ app.use('/api/auth',auth)
 const selfeva = require('./routes/Eva/selfeva')
 app.use('/api/Eva/selfeva',selfeva)
 
+const edit_eva = require('./routes/Eva/editeva')
+app.use('/api/Eva/editeva',edit_eva)
+
 app.use((req,res)=> res.status(404).json({message:"Route not Found"}))
 app.listen(3001,()=>{
 

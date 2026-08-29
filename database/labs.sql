@@ -40,7 +40,7 @@ CREATE TABLE `tb_eva` (
 
 LOCK TABLES `tb_eva` WRITE;
 /*!40000 ALTER TABLE `tb_eva` DISABLE KEYS */;
-INSERT INTO `tb_eva` VALUES (1,1,1,1,'2020-05-06',NULL,NULL);
+INSERT INTO `tb_eva` VALUES (1,1,1,2,'2020-05-06',192.00,NULL);
 /*!40000 ALTER TABLE `tb_eva` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -68,6 +68,7 @@ CREATE TABLE `tb_evadetail` (
 
 LOCK TABLES `tb_evadetail` WRITE;
 /*!40000 ALTER TABLE `tb_evadetail` DISABLE KEYS */;
+INSERT INTO `tb_evadetail` VALUES (1,1,1,'asdf',2,NULL,'1787984518579.223bject Undefined].png'),(1,1,1,'asdf',2,NULL,'1787984518880.1833bject Undefined].png'),(1,2,1,'adsf',4,NULL,'1787984518691.0198bject Undefined].png'),(1,2,1,'adsf',4,NULL,'1787984518881.9595bject Undefined].png'),(1,3,1,'adf',1,NULL,'1787984518692.0283bject Undefined].png'),(1,3,1,'adf',1,NULL,'1787984518881.2197bject Undefined].png'),(1,4,1,'adsf',3,NULL,'1787984518716.4583bject Undefined].png'),(1,4,1,'adsf',3,NULL,'1787984518882.325bject Undefined].png'),(1,1,1,'asdf',2,NULL,'1787984519139.602bject Undefined].png'),(1,2,1,'adsf',4,NULL,'1787984519140.8245bject Undefined].png'),(1,3,1,'adf',1,NULL,'1787984519142.2234bject Undefined].png'),(1,4,1,'adsf',3,NULL,'1787984519143.0554bject Undefined].png'),(1,1,1,'asdf',2,NULL,'1787984519310.959bject Undefined].png'),(1,2,1,'adsf',4,NULL,'1787984519310.0986bject Undefined].png'),(1,3,1,'adf',1,NULL,'1787984519311.6565bject Undefined].png'),(1,4,1,'adsf',3,NULL,'1787984519311.1653bject Undefined].png'),(1,1,1,'asdf',2,NULL,'1787984527896.335bject Undefined].png'),(1,2,1,'adsf',4,NULL,'1787984527896.3354bject Undefined].png'),(1,3,1,'adf',1,NULL,'1787984527896.6694bject Undefined].png'),(1,4,1,'adsf',3,NULL,'1787984527896.6973bject Undefined].png'),(1,1,1,'asdf',2,NULL,'1787984529243.2695bject Undefined].png'),(1,2,1,'adsf',4,NULL,'1787984529243.8352bject Undefined].png'),(1,3,1,'adf',1,NULL,'1787984529245.7676bject Undefined].png'),(1,4,1,'adsf',3,NULL,'1787984529245.9844bject Undefined].png'),(1,1,1,'asdf',2,NULL,'1787984613655.572bject Undefined].png'),(1,2,1,'adsf',4,NULL,'1787984613660.547bject Undefined].png'),(1,3,1,'adf',1,NULL,'1787984613660.8567bject Undefined].png'),(1,4,1,'adsf',3,NULL,'1787984613660.2576bject Undefined].png'),(1,1,1,'asdf',2,NULL,'1787984674488.928bject Undefined].png'),(1,2,1,'adsf',4,NULL,'1787984674490.3303bject Undefined].png'),(1,3,1,'adf',1,NULL,'1787984674490.5254bject Undefined].png'),(1,4,1,'adsf',3,NULL,'1787984674490.913bject Undefined].png');
 /*!40000 ALTER TABLE `tb_evadetail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -194,4 +195,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-08-29 11:37:21
+-- Dump completed on 2026-08-29 14:17:08
