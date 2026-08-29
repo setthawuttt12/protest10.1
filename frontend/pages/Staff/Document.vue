@@ -42,7 +42,7 @@
                                 <tr v-for="(items,index) in result" :key="items.id_doc">
                                     <td class="border text-center">{{ index+1 }}</td>
                                     <td class="border text-center">{{ items.name_doc }}</td>
-                                    <td class="border text-center">{{ items.day_doc }}</td>
+                                    <td class="border text-center">{{ formatDate(items.day_doc) }}</td>
                                     <td class="border text-center"><v-btn class="text-center text-white" prepend-icon="mdi-eye" @click="view(items.file)" size="small" v-if="items.file" color="info">เปิดดู</v-btn></td>
                                     <td class="border text-center">
                                         <center>
@@ -136,6 +136,15 @@ const del = async (id_doc:number) => {
         console.error("Error delete doc",error);
         
     }
+}
+
+const formatDate = (dateStr:string)=>{
+    if(!dateStr)return '-'
+    const date = new Date(dateStr)
+    const day = String(date.getDay()).padStart(2,'0')
+    const month = String(date.getMonth()).padStart(2,'0')
+    const year = String(date.getFullYear())
+    return `${day}/${month}/${year}`
 }
 
 const view = (filename:string)=>{
