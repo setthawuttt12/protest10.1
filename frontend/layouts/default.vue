@@ -13,7 +13,7 @@
             <v-navigation-drawer v-model="drawer" app width="260" color="#404040" :temporary="isMobile" :permanent="!isMobile">
                 <v-list density="comfortable">
                     <v-list-item v-for="item in navitem" :key="item.title" :to="item.to">
-
+                        {{ item.title }}
                     </v-list-item>
                 </v-list>
             </v-navigation-drawer>
@@ -81,7 +81,7 @@ const roles = [
     //eva
     {title:'หน้าหลัก',to:'/Evaluatee',role:'ผู้รับการประเมินผล'},
     {title:'แก้ไขข้อมูลส่วนตัว',to:'/Evaluatee/edit_eva',role:'ผู้รับการประเมินผล'},
-    {title:'แบบประเมินตนเอง',to:'/Evaluatee',role:'ผู้รับการประเมินผล'},
+    {title:'แบบประเมินตนเอง',to:'/Evaluatee/selfeva',role:'ผู้รับการประเมินผล'},
     {title:'ตรวจสอบผลการประเมิน',to:'/Evaluatee',role:'ผู้รับการประเมินผล'},
     {title:'รายงานผลการประเมิน',to:'/Evaluatee',role:'ผู้รับการประเมินผล'},
     {title:'ประเมิน',to:'/Staff/Status_commit',role:'ฝ่ายบุคลากร'},

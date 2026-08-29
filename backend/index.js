@@ -18,6 +18,12 @@ app.use('/uploads',express.static(path.join(__dirname,'./uploads')))
 const pf = require('./routes/profile')
 app.use('/api/profile',pf)
 
+const auth = require('./routes/auth')
+app.use('/api/auth',auth)
+
+const selfeva = require('./routes/Eva/selfeva')
+app.use('/api/Eva/selfeva',selfeva)
+
 app.use((req,res)=> res.status(404).json({message:"Route not Found"}))
 app.listen(3001,()=>{
 
