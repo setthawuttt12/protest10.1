@@ -98,7 +98,7 @@ const fetchCommits = async () => {
 const fecthTopics = async () => {
     const token = localStorage.getItem('token')
     try {
-        const res = await axios.get(`${eva}/self_eva/topic`, { headers: { Authorization: `Bearer ${token}` } })
+        const res = await axios.get(`${eva}/selfeva/topic`, { headers: { Authorization: `Bearer ${token}` } })
         topics.value = res.data
     } catch (error) {
         console.error('error get user', error)

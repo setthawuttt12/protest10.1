@@ -18,6 +18,12 @@ app.use('/uploads',express.static(path.join(__dirname,'./uploads')))
 const pf = require('./routes/profile')
 app.use('/api/profile',pf)
 
+const doc = require('./routes/docnoe')
+app.use('/api/docnoe',doc)
+
+const dash = require('./routes/dash')
+app.use('/api/dash',dash)
+
 const auth = require('./routes/auth')
 app.use('/api/auth',auth)
 
