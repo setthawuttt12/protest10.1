@@ -113,7 +113,7 @@ const roles = [
     //comit
     {title:'รายชื่อผู้รับการประเมิน',to:'/Committee',role:'กรรมการประเมิน'},
     {title:'ดำเนินการประเมิน',to:'/Committee/showeva',role:'กรรมการประเมิน'},
-    {title:'ตรวจสอบผลและยืนยัน',to:'/Committee/check_score',role:'กรรมการประเมิน'},
+    {title:'ตรวจสอบผลและยืนยัน',to:'/Committee/Check_confirm',role:'กรรมการประเมิน'},
     {title:'คู่มือการประเมิน',to:'/Committee/Doc',role:'กรรมการประเมิน'},
 
 ]
