@@ -13,7 +13,7 @@
             <v-navigation-drawer v-model="drawer" app width="260" color="#404040" :temporary="isMobile" :permanent="!isMobile">
                 <v-list density="comfortable">
                     <v-list-item v-for="item in navitem" :key="item.title" :to="item.to">
-                        <v-list-item-title>{{ item.title }}</v-list-item-title>
+                        {{ item.title }}
                     </v-list-item>
                 </v-list>
             </v-navigation-drawer>
@@ -64,8 +64,8 @@ onMounted(fecth)
 
 const roles = [
     {title:'หน้าหลัก',to:'/Staff/',role:'ฝ่ายบุคลากร'},
-    {title:'จัดการผู้รับการประเมินผล',to:'/Staff/ManageEva',role:'ฝ่ายบุคลากร'},
-    {title:'จัดการกรรมการประเมิน',to:'/Staff/ManageCommit',role:'ฝ่ายบุคลากร'},
+    {title:'จัดการผู้รับการประเมินผล',to:'/Staff/MangeEva',role:'ฝ่ายบุคลากร'},
+    {title:'จัดการกรรมการประเมิน',to:'/Staff/MangeCommit',role:'ฝ่ายบุคลากร'},
     {title:'จัดการหัวข้อการประเมิน',to:'/Staff/Topic',role:'ฝ่ายบุคลากร'},
     {title:'จัดการตัวชี้วัด',to:'/Staff/Indicate',role:'ฝ่ายบุคลากร'},
     {title:'จัดการรอบการประเมิน',to:'/Staff/Round_eva',role:'ฝ่ายบุคลากร'},
@@ -76,12 +76,12 @@ const roles = [
     {title:'สถานะการประเมินผู้รับการประเมินผล',to:'/Staff/Status_eva',role:'ฝ่ายบุคลากร'},
     {title:'สถานะการประเมินกรรมการประเมิน',to:'/Staff/Status_commit',role:'ฝ่ายบุคลากร'},
     {title:'เอกสารหรือคู่มือการประเมิน',to:'/Staff/Document',role:'ฝ่ายบุคลากร'},
-    {title:'รายงาน',to:'/Staff/Report',role:'ฝ่ายบุคลากร'},
+    {title:'รายงานผู้รับการประเมินผล',to:'/Staff/Report',role:'ฝ่ายบุคลากร'},
 
     //eva
     {title:'หน้าหลัก',to:'/Evaluatee',role:'ผู้รับการประเมินผล'},
     {title:'แก้ไขข้อมูลส่วนตัว',to:'/Evaluatee/edit_eva',role:'ผู้รับการประเมินผล'},
-    {title:'แบบประเมินตนเอง',to:'/Evaluatee',role:'ผู้รับการประเมินผล'},
+    {title:'แบบประเมินตนเอง',to:'/Evaluatee/selfeva',role:'ผู้รับการประเมินผล'},
     {title:'ตรวจสอบผลการประเมิน',to:'/Evaluatee',role:'ผู้รับการประเมินผล'},
     {title:'รายงานผลการประเมิน',to:'/Evaluatee',role:'ผู้รับการประเมินผล'},
     {title:'ประเมิน',to:'/Staff/Status_commit',role:'ฝ่ายบุคลากร'},
@@ -105,7 +105,7 @@ const bg =(role)=>{
 <style scoped>
 @media print{
     .v-app-bar,.v-btn.no-p{
-        display: 0 !important;
+        display: none !important;
         margin: 0 !important;
         margin-top: 0 !important;
         padding: 0 !important;

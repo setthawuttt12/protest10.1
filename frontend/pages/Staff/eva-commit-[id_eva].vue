@@ -42,7 +42,7 @@
                                 
                             </thead>
                             <tbody>
-                                <tr v-for="(items,index) in result" :key="items.id_commit">
+                                <tr v-for="(items,index) in List" :key="items.id_commit">
                                     <td class="border text-center">{{ index+1 }}</td>
                                     <td class="border text-center">{{ nameOf(items.id_member) }}</td>
                                     <td class="border text-center">{{ items.role }}</td>
@@ -52,7 +52,6 @@
                                         </center>
                                     </td>
                                 </tr>
-                                <tr  v-if="result.length === 0"><td class="text-center text-red" colspan="10">ไม่พบข้อมูล</td></tr>
                             </tbody>
                         </v-table>
                     </v-card-text>
@@ -101,10 +100,7 @@ const token = import.meta.client ? localStorage.getItem('token'):null
 const saveMember = async()=>{
     try {
         await axios.post(`${staff}/commit/save/${id_eva}`,List.value,{headers:{Authorization:`Bearer ${token}`}})
-        alert('ทำรายการสำเร็จ')
-        await fetch()
-        
-        
+        alert('ทำรายการสำเร็จ')  
     } catch (error) {
         console.error("Error save commit",error);
         
