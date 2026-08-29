@@ -5,7 +5,7 @@
                 <v-form v-if="user.status_eva === 2 || user.status_eva === 3">
                     <h1 class="text-h5 font-weight-bold">คะแนนประเมินของผู้รับการประเมิน</h1>
                     <v-card class="pa-2 mt-2">
-                        <p>ชื่อ - นามสกุล : {{ user.first_name }} {{ user.last_name }}</p>
+                        <p>ชื่อ - นามสกุล : {{ user.fname }} {{ user.lname }}</p>
                         <p>รอบประเมินที่ : {{ user.round_sys }} ปี {{ user.year_sys }}</p>
                     </v-card>
                     <v-row class="mt-2" v-for="(topic,t) in topics" :key="topic.id_topic">

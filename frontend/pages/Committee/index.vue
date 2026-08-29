@@ -12,21 +12,16 @@
                                     <th class="text-center border">ชื่อ</th>
                                     <th class="text-center border">นามสกุล</th>
                                     <th class="text-center border">วันที่ออกแบบประเมิน</th>
-                                    <!-- <th class="text-center border">รอบการประเมิน</th>
-                                    <th class="text-center border">สถานะการประเมิน</th> -->
                                     <th class="text-center border">คะแนนประเมิน</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="(items,index) in result" :key="items.id_eva">
                                     <td class="text-center border">{{ index+1 }}</td>
-                                    <td class="text-center border">{{ items.first_name }}</td>
-                                    <td class="text-center border">{{ items.last_name }}</td>
+                                    <td class="text-center border">{{ items.fname }}</td>
+                                    <td class="text-center border">{{ items.lname }}</td>
                                     <td class="text-center border">{{ items.day_eva }}</td>
-                                    <!-- <td class="text-center border">รอบการประเมินที่ {{ items.round_sys }} ปี {{ year_sys }}</td>
-                                    <td class="text-center border">{{ items.status_eva === 1 ? 'ยังไม่ได้ประเมิน' : items.status_eva === 2 ? 'รอกรรมการประเมิน' : 'ประเมินเสร็จสิ้น' }}</td> -->
                                     <td class="text-center border">
-                                        <!-- <v-btn color="warning" class="text-white" size="small" @click="edit(items)">แก้ไข</v-btn>&nbsp; -->
                                         <v-btn color="blue" class="text-white" size="small" @click="go(items.id_eva)">ตรวจสอบ</v-btn>
                                     </td>
                                 </tr>
