@@ -44,7 +44,8 @@ const logout = ()=>{
     return navigateTo('/',{replace:true})
 }
 
-const navitem = computed(()=> roles.fitter((item)=> item.role.includes(user.value.role)))
+const navitem = computed(()=> roles.filter((item)=> item.role.includes(user.value.role)))
+
 
 
 const fecth = async()=>{
