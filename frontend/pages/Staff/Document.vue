@@ -1,0 +1,152 @@
+<template>
+    <v-container>
+        <v-row justify="center">
+            <v-col md="12" cols="12">
+                <v-card class="pa-2">
+                    <v-card-title>
+                        <h1 class="text-h5 text-center">เอกสารหรือคู่มือการประเมิน</h1>
+                    </v-card-title>
+                    <v-card-text>
+                        <br>
+                        <v-form @submit.prevent="saveMember">
+                            <v-row>
+                                <v-col cols="12" md="6">
+                                    <v-text-field label="ชื่อเอกสาร" v-model="name_doc" :error-messages="error.name_doc" prepend-inner-icon="mdi-file-edit"></v-text-field>
+                                </v-col>
+                                <v-col cols="12" md="6">
+                                    <v-file-input label="ไฟล์เอกสาร" accept=".pdf" hint="รองรับเฉพาะไฟล์ PDF ขนาดไม่เกิน 10MB" persistent-hint v-model="file" :error-messages="error.file"></v-file-input>
+                                </v-col>
+                            </v-row>
+                            <v-row>
+                                <v-col cols="12" md="12">
+                                    <center>
+                                        <v-btn class="text-center ma-2 " color="primary" type="submit">บันทึก</v-btn>
+                                        <v-btn class="text-center ma-2 " color="error" type="reset">ยกเลิก</v-btn>
+                                    </center>
+                                </v-col>
+                            </v-row>
+                        </v-form>
+                        <v-text-field class="mt-3" v-model="search" prepend-inner-icon="mdi-magnify"></v-text-field>
+                        <v-table class="table mt-3">
+                            <thead>
+                                <tr>
+                                    <th class="border text-center">ลำดับ</th>
+                                    <th class="border text-center">ชื่อเอกสาร</th>
+                                    <th class="border text-center">วันที่ออกเอกสาร</th>
+                                    <th class="border text-center">ไฟล์เอกสาร</th>
+                                    <th class="border text-center">จัดการ</th>
+                                </tr>
+                                
+                            </thead>
+                            <tbody>
+                                <tr v-for="(items,index) in result" :key="items.id_doc">
+                                    <td class="border text-center">{{ index+1 }}</td>
+                                    <td class="border text-center">{{ items.name_doc }}</td>
+                                    <td class="border text-center">{{ items.day_doc }}</td>
+                                    <td class="border text-center"><v-btn class="text-center text-white" prepend-icon="mdi-eye" @click="view(items.file)" size="small" v-if="items.file" color="info">เปิดดู</v-btn></td>
+                                    <td class="border text-center">
+                                        <center>
+                                            <v-btn class="text-center ma-2 text-white" color="error" size="small" @click="del(items.id_doc)">ลบ</v-btn>
+                                        </center>
+                                    </td>
+                                </tr>
+                                <tr  v-if="result.length === 0"><td class="text-center text-red" colspan="10">ไม่พบข้อมูล</td></tr>
+                            </tbody>
+                        </v-table>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+        </v-row>
+    </v-container>
+</template>
+
+<script setup lang="ts">
+import axios from 'axios';
+import { api, staff } from '~/API/base';
+
+
+const error = ref<Record<string,string>>({})
+const file = ref<File | null>(null)
+const dataResult = ref([])
+const search = ref('')
+const name_doc = ref('')
+
+const token = import.meta.client ? localStorage.getItem('token'):null
+
+const saveMember = async()=>{
+    if(!name_doc.value || !file.value)return alert("กรอกข้อมูลให้ครบถ้วน")
+    const maxSize = 10 *1024*1024
+    if(file.value.size > maxSize){
+        alert("ไฟล์มีขนาดใหญ่กว่า 10MB")
+    }
+    const formData = new FormData
+    formData.append('name_doc',name_doc.value)
+    formData.append('file',file.value)
+    try {
+        await axios.post(`${staff}/doc/save`,formData,{headers:{Authorization:`Bearer ${token}`}})
+        alert('ทำรายการสำเร็จ')
+        await fetch()
+        name_doc.value = ''
+        file.value = null
+        
+    } catch (error) {
+        console.error("Error save doc",error);
+        
+    }
+}
+
+const fetch = async()=>{
+    try {
+        
+        const res = await axios.get(`${staff}/doc/show`,{headers:{Authorization:`Bearer ${token}`}})
+        dataResult.value = res.data
+
+    } catch (error) {
+        console.error("error fetch doc",error);
+        
+    }
+}
+
+
+const result = computed(()=>{
+    if(!search.value)return dataResult.value
+
+    const s = search.value.toLowerCase()
+
+    return dataResult.value.filter((items:any)=>{
+
+        return(
+            items.name_doc?.toLowerCase().includes(s) 
+        )
+
+    })
+})
+
+
+const del = async (id_doc:number) => {
+    if(!confirm('ต้องการลบข้อมูลชุดนี้ใช่หรือไม่'))return
+    try {
+        
+        await axios.delete(`${staff}/doc/delete/${id_doc}`,{headers:{Authorization:`Bearer ${token}`}})
+        await fetch()
+        name_doc.value = ''
+        file.value = null
+
+    } catch (error) {
+        console.error("Error delete doc",error);
+        
+    }
+}
+
+const view = (filename:string)=>{
+    const url = new URL(`/uploads/document/${filename}`,api).href
+    window.open(url,'_blank')
+}
+
+onMounted(fetch)
+
+</script>
+
+<style scoped>
+
+</style>
