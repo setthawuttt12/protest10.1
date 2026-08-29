@@ -17,7 +17,6 @@
                                 <th class="bg-grey border pa-1" style="width: 10%;">รายละเอียดตัวชี้วัด</th>
                                 <th class="bg-grey border pa-1" style="width: 10%;">น้ำหนักคะแนน</th>
                                 <th class="bg-grey border pa-1" style="width: 10%;">คะแนนเต็ม</th>
-                                <th class="bg-grey border pa-1" style="width: 10%;">รายละเอียด</th>
                                 <th class="bg-grey border pa-1" style="width: 10%;">คะแนนทีได้</th>
                             </tr>
                             <tr v-for="indicate in topic.indicates" :key="indicate.id_indicate">
@@ -25,15 +24,29 @@
                                 <td class="border pa-1 text-center" style="width: 10%;">{{ indicate.detail_indicate }}</td>
                                 <td class="border pa-1 text-center" style="width: 10%;">{{ indicate.point_indicate }}</td>
                                 <td class="border pa-1 text-center" style="width: 10%;">{{  indicate.point_indicate*4 }}</td>
-                                <td class="border pa-1 text-center" style="width: 10%;">{{ indicate.detail_eva || '-' }}</td>
-                                <td class="border pa-1 text-center" style="width: 10%;">{{ indicate.score_member*indicate.point_indicate }}</td>
+                                <td class="border pa-1 text-center" style="width: 10%;">{{ (((scores[indicate.id_indicate]?.a ?? 0)+(scores[indicate.id_indicate]?.b ?? 0)+(scores[indicate.id_indicate]?.c ?? 0))/3).toFixed(2) }}</td>
                             </tr>
                         </v-table>
                     </v-col>
                 </v-row>
                 <div class="mt-2 text-center">
-                        <v-card color="success" class="pa-2 text-end">คะแนนรวม : {{ user.total_eva }} คะแนน</v-card>
+                        <v-card color="success" class="pa-2 text-end">คะแนนรวม : {{ ((user.total_commit)/3).toFixed(2) }} คะแนน</v-card>
                     </div>
+                    <div class="mt-4">
+                        <v-card class="pa-2">
+                            <label for="">ข้อเสนอแนะของกรรมการ</label>
+                        <v-row>
+                            <v-col cols="12" v-for="(commit,c) in commits" :key="commit.id_commit">
+                                <img :scr="`http://localhost:3001/uploads/signature/${commit.signature}`" :alt="`รอ${commit.level_commit}ประเมิน`" width="20%"> <br>
+                                (   {{ commit.fname }} {{ commit.lname }}) <br>
+                                {{ commit.level_commit }}
+                            </v-col>
+                        </v-row>
+                    </v-card>
+                </div>
+                <div class="text-center mt-4">
+                    <v-btn color="warning" class="no-p" @click="printDoc">พิมพ์</v-btn>
+                </div>
             </v-form>
             <v-alert v-else-if="user.status_eva === 1" type="warning">ยังไม่ได้ประเมิน</v-alert>
             <v-alert v-else type="error">ยังไม่มีแบบประเมิน</v-alert>
@@ -48,6 +61,12 @@ import {eva} from '~/API/base'
 
 const user = ref<any>({})
 const topics = ref<any>([])
+const scores = ref<any>([])
+const commits =ref<any>([])
+
+const printDoc = ()=>{
+    window.print()
+}
 
 const fecth = async () => {
     const token = localStorage.getItem('token')
@@ -58,10 +77,28 @@ const fecth = async () => {
         console.error('error get user', error)
     }
 }
+const fecthScore = async () => {
+    const token = localStorage.getItem('token')
+    try {
+        const res = await axios.get(`${eva}/score_commit/score`, { headers: { Authorization: `Bearer ${token}` } })
+        scores.value = res.data
+    } catch (error) {
+        console.error('error get user', error)
+    }
+}
+const fetchCommits = async () => {
+    const token = localStorage.getItem('token')
+    try {
+        const res = await axios.get(`${eva}/score_commit/commit`, { headers: { Authorization: `Bearer ${token}` } })
+        commits.value = res.data
+    } catch (error) {
+        console.error('error get user', error)
+    }
+}
 const fecthTopics = async () => {
     const token = localStorage.getItem('token')
     try {
-        const res = await axios.get(`${eva}/score_member/topic`, { headers: { Authorization: `Bearer ${token}` } })
+        const res = await axios.get(`${eva}/self_eva/topic`, { headers: { Authorization: `Bearer ${token}` } })
         topics.value = res.data
     } catch (error) {
         console.error('error get user', error)
@@ -69,10 +106,19 @@ const fecthTopics = async () => {
 }
 
 onMounted(async () => {
-    Promise.all([fecth(),fecthTopics()])
+    Promise.all([fecth(),fecthTopics(),fetchCommits(),fecthScore()])
 })
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 
+@media print{
+    .v-app-bar,.v-btn.no-p{
+        display: 0 !important;
+        margin: 0 !important;
+        margin-top: 0 !important;
+        padding: 0 !important;
+        width: 100 !important;
+    }
+}
 </style>

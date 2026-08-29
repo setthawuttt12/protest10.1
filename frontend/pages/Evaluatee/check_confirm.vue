@@ -5,7 +5,7 @@
             <h1 class="text-h5 font-weight-bold">ตรวจสอบผลการประเมิน</h1>
             <div class="mt-4">
                 <nuxt-link to="/Evaluatee/score_member" ><v-btn color="blue">ตรวจสอบผลการประเมินตนเอง</v-btn></nuxt-link>&nbsp;&nbsp;
-                <nuxt-link to="/Evaluatee/score_member"><v-btn color="success">ตรวจสอบผลการประเมินกรรมการ</v-btn></nuxt-link>
+                <nuxt-link to="/Evaluatee/score_commit"><v-btn color="success">ตรวจสอบผลการประเมินกรรมการ</v-btn></nuxt-link>
             </div>
         </v-col>
     </v-row>

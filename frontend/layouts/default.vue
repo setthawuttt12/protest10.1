@@ -83,8 +83,7 @@ const roles = [
     {title:'แก้ไขข้อมูลส่วนตัว',to:'/Evaluatee/edit_eva',role:'ผู้รับการประเมินผล'},
     {title:'แบบประเมินตนเอง',to:'/Evaluatee/selfeva',role:'ผู้รับการประเมินผล'},
     {title:'ตรวจสอบผลการประเมิน',to:'/Evaluatee/check_confirm',role:'ผู้รับการประเมินผล'},
-    {title:'รายงานผลการประเมิน',to:'/Evaluatee',role:'ผู้รับการประเมินผล'},
-    {title:'ประเมิน',to:'/Staff/Status_commit',role:'ฝ่ายบุคลากร'},
+    {title:'รายงานผลการประเมิน',to:'/Evaluatee/report_eva',role:'ผู้รับการประเมินผล'},
     {title:'คู่มือการประเมิน',to:'/Evaluatee/Doc',role:'ผู้รับการประเมินผล'},
 
     //comit
