@@ -23,6 +23,9 @@ app.use('/api/profile',profile)
 const dash = require('./routes/dash')
 app.use('/api/dash',dash)
 
+const docnoe = require('./routes/docnoe')
+app.use('/api/docnoe',docnoe)
+
 
 //staff Api end point
 

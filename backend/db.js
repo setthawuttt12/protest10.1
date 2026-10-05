@@ -1,11 +1,10 @@
 const mysql2 = require('mysql2')
 
-const db = mysql2.createConnection(
+const db = mysql2.createPool(
     {
-        host:'localhost',
+        host:'mysql',
         user:'root',
         password:'1234',
-        port:'3307',
         database:'protest10'
     }
 )
