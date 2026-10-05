@@ -1,23 +1,23 @@
-service:
+services:
   frontend:
     build: ./frontend
     depends_on:
       - backend
     container_name: Frontend_Container
-    port: ["3000:3000"]
+    ports: ["3000:3000"]
     command: npm run dev -- --host 0.0.0.0
     restart: always
     volumes:
       - ./frontend:/app
       - /app/node_modules
-    enviroment:
+    environment:
       - CHOKIDAR_USEPOLLING=true
     networks: ["app-network"]
 
   backend:
     build: ./backend
     depends_on:
-      -mysql
+      - mysql
     container_name: Backend_Container
     ports: ["3001:3001"]
     command: npx -y nodemon -L index.js
@@ -31,7 +31,7 @@ service:
       DB_PASSWORD: 1234
       DB_DATABASE: protest10
       JWT_SECRET: "Tee&Kate"
-      CHOKIDAR_USEPULLING: true
+      CHOKIDAR_USEPOLLING: true
     networks: ["app-network"]
 
   phpmyadmin:
@@ -45,20 +45,20 @@ service:
       PMA_HOST: mysql
       PMA_USER: root
       PMA_PASSWORD: 1234
-    network: ["app-network"]
+    networks: ["app-network"]
 
   mysql:
-  image: mysql
-  container_name: MYSQL_Container
-  ports: ["3305:3306"]
-  restart: always
-  volumes:
-    - ./database:/docker-entrypoint-initdb.d
-    - mysql_data:/var/lib/mysql
-  environment:
-    MYSQL_ROOT_PASSWORD: 1234
-    MYSQL_DATABASE: protest10
-  networks: ["app-network"]
+    image: mysql
+    container_name: MYSQL_Container
+    ports: ["3305:3306"]
+    restart: always
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: protest10
+    networks: ["app-network"]
 
 networks:
   app-network:
