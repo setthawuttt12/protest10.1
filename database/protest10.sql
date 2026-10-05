@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
 --
--- Host: localhost    Database: labs
+-- Host: localhost    Database: protest10
 -- ------------------------------------------------------
--- Server version	8.0.46
+-- Server version	8.0.45
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,6 +14,61 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `tb_commit`
+--
+
+DROP TABLE IF EXISTS `tb_commit`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_commit` (
+  `id_commit` int NOT NULL AUTO_INCREMENT,
+  `id_eva` int NOT NULL,
+  `id_member` int NOT NULL,
+  `status_commit` varchar(10) NOT NULL,
+  `level_commit` varchar(100) NOT NULL,
+  `detail_commit` text,
+  `signature` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id_commit`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_commit`
+--
+
+LOCK TABLES `tb_commit` WRITE;
+/*!40000 ALTER TABLE `tb_commit` DISABLE KEYS */;
+INSERT INTO `tb_commit` VALUES (16,1,3,'y','ประธาน','ทดสอบกรรมการประเมิน','1788008991475.png'),(17,1,4,'n','กรรมการ',NULL,NULL),(18,1,5,'n','เลขา',NULL,NULL);
+/*!40000 ALTER TABLE `tb_commit` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_doc`
+--
+
+DROP TABLE IF EXISTS `tb_doc`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_doc` (
+  `id_doc` int NOT NULL AUTO_INCREMENT,
+  `name_doc` varchar(100) NOT NULL,
+  `day_doc` date DEFAULT NULL,
+  `file` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_doc`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_doc`
+--
+
+LOCK TABLES `tb_doc` WRITE;
+/*!40000 ALTER TABLE `tb_doc` DISABLE KEYS */;
+INSERT INTO `tb_doc` VALUES (3,'คู่มือการประเมิน','2026-08-29','1787985158410.pdf');
+/*!40000 ALTER TABLE `tb_doc` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `tb_eva`
@@ -40,7 +95,7 @@ CREATE TABLE `tb_eva` (
 
 LOCK TABLES `tb_eva` WRITE;
 /*!40000 ALTER TABLE `tb_eva` DISABLE KEYS */;
-INSERT INTO `tb_eva` VALUES (1,1,1,2,'2020-05-06',192.00,NULL);
+INSERT INTO `tb_eva` VALUES (1,1,1,2,'2020-05-06',35.00,21.00);
 /*!40000 ALTER TABLE `tb_eva` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -52,14 +107,16 @@ DROP TABLE IF EXISTS `tb_evadetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tb_evadetail` (
-  `id_eva` int DEFAULT NULL,
-  `id_indicate` int DEFAULT NULL,
+  `id_evadetail` int NOT NULL AUTO_INCREMENT,
+  `id_eva` int NOT NULL,
+  `id_indicate` int NOT NULL,
   `status_eva` int DEFAULT NULL,
   `detail_eva` text,
   `score_member` int DEFAULT NULL,
   `score_commit` int DEFAULT NULL,
-  `file_eva` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `file_eva` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id_evadetail`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +125,7 @@ CREATE TABLE `tb_evadetail` (
 
 LOCK TABLES `tb_evadetail` WRITE;
 /*!40000 ALTER TABLE `tb_evadetail` DISABLE KEYS */;
-INSERT INTO `tb_evadetail` VALUES (1,1,1,'asdf',2,NULL,'1787984518579.223bject Undefined].png'),(1,1,1,'asdf',2,NULL,'1787984518880.1833bject Undefined].png'),(1,2,1,'adsf',4,NULL,'1787984518691.0198bject Undefined].png'),(1,2,1,'adsf',4,NULL,'1787984518881.9595bject Undefined].png'),(1,3,1,'adf',1,NULL,'1787984518692.0283bject Undefined].png'),(1,3,1,'adf',1,NULL,'1787984518881.2197bject Undefined].png'),(1,4,1,'adsf',3,NULL,'1787984518716.4583bject Undefined].png'),(1,4,1,'adsf',3,NULL,'1787984518882.325bject Undefined].png'),(1,1,1,'asdf',2,NULL,'1787984519139.602bject Undefined].png'),(1,2,1,'adsf',4,NULL,'1787984519140.8245bject Undefined].png'),(1,3,1,'adf',1,NULL,'1787984519142.2234bject Undefined].png'),(1,4,1,'adsf',3,NULL,'1787984519143.0554bject Undefined].png'),(1,1,1,'asdf',2,NULL,'1787984519310.959bject Undefined].png'),(1,2,1,'adsf',4,NULL,'1787984519310.0986bject Undefined].png'),(1,3,1,'adf',1,NULL,'1787984519311.6565bject Undefined].png'),(1,4,1,'adsf',3,NULL,'1787984519311.1653bject Undefined].png'),(1,1,1,'asdf',2,NULL,'1787984527896.335bject Undefined].png'),(1,2,1,'adsf',4,NULL,'1787984527896.3354bject Undefined].png'),(1,3,1,'adf',1,NULL,'1787984527896.6694bject Undefined].png'),(1,4,1,'adsf',3,NULL,'1787984527896.6973bject Undefined].png'),(1,1,1,'asdf',2,NULL,'1787984529243.2695bject Undefined].png'),(1,2,1,'adsf',4,NULL,'1787984529243.8352bject Undefined].png'),(1,3,1,'adf',1,NULL,'1787984529245.7676bject Undefined].png'),(1,4,1,'adsf',3,NULL,'1787984529245.9844bject Undefined].png'),(1,1,1,'asdf',2,NULL,'1787984613655.572bject Undefined].png'),(1,2,1,'adsf',4,NULL,'1787984613660.547bject Undefined].png'),(1,3,1,'adf',1,NULL,'1787984613660.8567bject Undefined].png'),(1,4,1,'adsf',3,NULL,'1787984613660.2576bject Undefined].png'),(1,1,1,'asdf',2,NULL,'1787984674488.928bject Undefined].png'),(1,2,1,'adsf',4,NULL,'1787984674490.3303bject Undefined].png'),(1,3,1,'adf',1,NULL,'1787984674490.5254bject Undefined].png'),(1,4,1,'adsf',3,NULL,'1787984674490.913bject Undefined].png');
+INSERT INTO `tb_evadetail` VALUES (3,1,3,1,'ทดสอบ',4,NULL,'1788008722768.2246bject Undefined].png'),(4,1,6,1,'ทดสอบ2',3,NULL,'1788008722770.8298bject Undefined].pdf'),(5,1,5,1,'ทดสอบ3',3,NULL,'1788008722770.25bject Undefined].pdf'),(6,1,7,1,'ทดสอบ4',3,NULL,'1788008722770.7095bject Undefined].pdf'),(7,1,3,2,NULL,NULL,2,NULL),(8,1,6,2,NULL,NULL,3,NULL),(9,1,5,2,NULL,NULL,1,NULL),(10,1,7,2,NULL,NULL,3,NULL);
 /*!40000 ALTER TABLE `tb_evadetail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +144,7 @@ CREATE TABLE `tb_indicate` (
   `check_indicate` varchar(100) DEFAULT NULL,
   `detail_indicate` text,
   PRIMARY KEY (`id_indicate`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +153,7 @@ CREATE TABLE `tb_indicate` (
 
 LOCK TABLES `tb_indicate` WRITE;
 /*!40000 ALTER TABLE `tb_indicate` DISABLE KEYS */;
-INSERT INTO `tb_indicate` VALUES (1,1,'คอมมมม',3,'y','ไม่มีไรมา่ก'),(2,1,'แล็ปท๊อป',1,'n','ฟส่กสด'),(3,2,'หระทะ',2,'y','กระทะดีขนาดไหน'),(4,2,'หม้อ',4,'n','หม้อดีมั้ย');
+INSERT INTO `tb_indicate` VALUES (3,2,'กระทะ',2,'y','กระทะดีขนาดไหน'),(5,3,'ซีพียู',5,'n','ความเร็วการประเมินผลของซีพียู'),(6,2,'หม้อ',2,'y','คุณภาพหม้อ'),(7,3,'การ์ดจอ',2,'y','ความเร็วการประมวลผลภาพ');
 /*!40000 ALTER TABLE `tb_indicate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +174,7 @@ CREATE TABLE `tb_member` (
   `role` enum('ฝ่ายบุคลากร','กรรมการประเมิน','ผู้รับการประเมินผล') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `pic_user` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_member`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +183,7 @@ CREATE TABLE `tb_member` (
 
 LOCK TABLES `tb_member` WRITE;
 /*!40000 ALTER TABLE `tb_member` DISABLE KEYS */;
-INSERT INTO `tb_member` VALUES (1,'nangi','sang','nangi@hotmail.com','nangi','$2b$10$FwRR86GVo5zpfoz2rNQOfernvV/YB6DuQw14F84mBnlLN5iCqb6ii','ผู้รับการประเมินผล','1787975174720.png');
+INSERT INTO `tb_member` VALUES (1,'nangi','sang','nangi@hotmail.com','nangi','$2b$10$FwRR86GVo5zpfoz2rNQOfernvV/YB6DuQw14F84mBnlLN5iCqb6ii','ผู้รับการประเมินผล','1787975174720.png'),(2,'staff','staff','staff@gmail.com','staff','$2b$10$MODsAh/LgGnz6pdyCdsIxuCKr.idzImFBxTQQBPpFTpmI7qjUoOpe','ฝ่ายบุคลากร',NULL),(3,'commit','commit','commit@gmail.com','commit','$2b$10$KbDvEygebxQzxmJ1agicauuZ4fHpqEfQpuT5V5FRmVC6od0Xp8242','กรรมการประเมิน',NULL),(4,'commit2','commit2','commit2@gmail.com','commit2','$2b$10$7cp.hXnPP2KTdlpJUA/9oOhgY4I6jnRb6UwknrflZJ4oxUU9nuzsS','กรรมการประเมิน',NULL),(5,'commit3','commit3','commit3@gmail.com','commit3','$2b$10$eDR/sr5Kq.FV56DmrULUJuOrxOX.5dn/q3naKln44SIZZYr38Tqj6','กรรมการประเมิน',NULL);
 /*!40000 ALTER TABLE `tb_member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +202,7 @@ CREATE TABLE `tb_system` (
   `year_sys` int DEFAULT NULL,
   `status_sys` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_sys`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +211,7 @@ CREATE TABLE `tb_system` (
 
 LOCK TABLES `tb_system` WRITE;
 /*!40000 ALTER TABLE `tb_system` DISABLE KEYS */;
-INSERT INTO `tb_system` VALUES (1,'2020-05-06','2090-05-06',1,1,'y');
+INSERT INTO `tb_system` VALUES (1,'2026-08-29','2026-09-06',1,2569,'y'),(2,'2026-08-05','2026-08-23',2,2568,'y');
 /*!40000 ALTER TABLE `tb_system` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,7 +226,7 @@ CREATE TABLE `tb_topic` (
   `id_topic` int NOT NULL AUTO_INCREMENT,
   `name_topic` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_topic`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,12 +235,12 @@ CREATE TABLE `tb_topic` (
 
 LOCK TABLES `tb_topic` WRITE;
 /*!40000 ALTER TABLE `tb_topic` DISABLE KEYS */;
-INSERT INTO `tb_topic` VALUES (1,'การประเมินผบคอม'),(2,'สินค้าถูกใจต');
+INSERT INTO `tb_topic` VALUES (2,'สินค้าถูกใจ'),(3,'การประเมินผลคอม');
 /*!40000 ALTER TABLE `tb_topic` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Dumping routines for database 'labs'
+-- Dumping routines for database 'protest10'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -195,4 +252,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-08-29 14:17:08
+-- Dump completed on 2026-10-05 13:58:55
