@@ -2,7 +2,6 @@ require('dotenv').config({path:'.env'})
 const fileUp = require('express-fileupload')
 const express = require('express')
 const path = require('path')
-const JWT_SECRET = process.env.JWT_SECRET
 const cors = require('cors')
 const app = express()
 
@@ -15,18 +14,52 @@ app.use(express.json())
 app.use(fileUp())
 app.use('/uploads',express.static(path.join(__dirname,'./uploads')))
 
-const pf = require('./routes/profile')
-app.use('/api/profile',pf)
+const auth = require('./routes/auth')
+app.use('/api/auth',auth)
 
-const doc = require('./routes/docnoe')
-app.use('/api/docnoe',doc)
+const profile = require('./routes/profile')
+app.use('/api/profile',profile)
 
 const dash = require('./routes/dash')
 app.use('/api/dash',dash)
 
-const auth = require('./routes/auth')
-app.use('/api/auth',auth)
+const docnoe = require('./routes/docnoe')
+app.use('/api/docnoe',docnoe)
 
+
+//staff Api end point
+
+const member = require('./routes/Staff/member')
+app.use('/api/Staff/member',member)
+
+const topic = require('./routes/Staff/topic')
+app.use('/api/Staff/topic',topic)
+
+const round = require('./routes/Staff/round')
+app.use('/api/Staff/round',round)
+
+const indicate = require('./routes/Staff/indicate')
+app.use('/api/Staff/indicate',indicate)
+
+const eva = require('./routes/Staff/eva')
+app.use('/api/Staff/eva',eva)
+
+const commit = require('./routes/Staff/commit')
+app.use('/api/Staff/commit',commit)
+
+const doc = require('./routes/Staff/doc')
+app.use('/api/Staff/doc',doc)
+
+const status = require('./routes/Staff/status')
+app.use('/api/Staff/status',status)
+
+const score_member4 = require('./routes/Staff/score_member')
+app.use('/api/Staff/score_member',score_member4)
+
+const score_commit4 = require('./routes/Staff/score_commit')
+app.use('/api/Staff/score_commit',score_commit4)
+
+//eva
 const selfeva = require('./routes/Eva/selfeva')
 app.use('/api/Eva/selfeva',selfeva)
 
@@ -38,6 +71,26 @@ app.use('/api/Eva/score_member',score_member)
 
 const score_commit = require('./routes/Eva/score_commit')
 app.use('/api/Eva/score_commit',score_commit)
+
+//commit
+const show_eva = require('./routes/Commit/show_eva')
+app.use('/api/Commit/show_eva',show_eva)
+
+const score_member2 = require('./routes/Commit/score_member')
+app.use('/api/Commit/score_member',score_member2)
+
+const save_score = require('./routes/Commit/save_score')
+app.use('/api/Commit/save_score',save_score)
+
+const check_confirm = require('./routes/Commit/check_confirm')
+app.use('/api/Commit/check_confirm',check_confirm)
+
+const score_commit2 = require('./routes/Commit/score_commit')
+app.use('/api/Commit/score_commit',score_commit2)
+
+const signature = require('./routes/Commit/signature')
+app.use('/api/Commit/signature',signature)
+
 app.use((req,res)=> res.status(404).json({message:"Route not Found"}))
 app.listen(3001,()=>{
 

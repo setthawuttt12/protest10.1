@@ -81,7 +81,7 @@ const login = async()=>{
         
         if(useRole === 'ฝ่ายบุคลากร')useRouter().push('/Staff')
         else if(useRole === 'ผู้รับการประเมินผล')useRouter().push('/Evaluatee')
-        else if(useRole === 'กรรมการประเมิน')useRouter().push('/Commitee')
+        else if(useRole === 'กรรมการประเมิน')useRouter().push('/Committee')
     } catch (err:any) {
         console.error("Error login");
         error.value = err.response?.data?.message || 'เข้าสู่ระบบไม่สำเร็จ'
